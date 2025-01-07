@@ -27,6 +27,12 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -35,19 +41,11 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="assets\ship\PNG\sprites\ship01\laser.png">
-      <Filter>assets</Filter>
-    </Image>
-    <Image Include="assets\ship\PNG\sprites\ship01\layer1.png">
-      <Filter>assets</Filter>
-    </Image>
-    <Image Include="assets\ship\PNG\sprites\ship01\layer2.png">
-      <Filter>assets</Filter>
-    </Image>
-    <Image Include="assets\ship\PNG\sprites\ship01\layer3.png">
-      <Filter>assets</Filter>
-    </Image>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
