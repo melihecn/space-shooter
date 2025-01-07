@@ -16,6 +16,7 @@ int main(void)
 	}
 	
 
+
 	// destructor closes window
 	delete game;
 	game = nullptr;
