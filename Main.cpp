@@ -4,7 +4,7 @@ int main(void)
 {
 	InitWindow(WIDTH, HEIGHT, "Space Shooter");
 
-	SetWindowState(FLAG_FULLSCREEN_MODE + FLAG_VSYNC_HINT + FLAG_WINDOW_RESIZABLE);
+	SetWindowState(FLAG_VSYNC_HINT);
 	
 	SetTargetFPS(144);
 

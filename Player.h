@@ -1,5 +1,7 @@
 #pragma once
 #include "raylib.h"
+#include "Laser.h"
+#include <vector>
 
 class Player
 {
@@ -16,6 +18,8 @@ private:
 	int health;
 	int shootPower;
 	int speed;
+	bool isMoving;
+	std::vector<Laser> lasers;
 
 public:
 	Player();
@@ -27,6 +31,9 @@ public:
 	void setPosition(Vector2 position);
 	int getSpeed() const;
 	void setSpeed(int speed);
+
+	void update();
+	void handleInput();
 
 	void resetAnimation();
 

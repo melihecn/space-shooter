@@ -30,33 +30,8 @@ void Game::start()
 
 void Game::update()
 {
-
-	if (IsKeyDown(KEY_D)) {
-		player->moveRight();
-	}
-	if (IsKeyDown(KEY_A))
-	{
-		player->moveLeft();
-	}
-	if (IsKeyDown(KEY_W))
-	{
-		player->moveUp();
-	}
-	if (IsKeyDown(KEY_S))
-	{
-		player->moveDown();
-	}
-	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) 
-	{
-		player->shoot();
-	}
-	if (IsKeyDown(KEY_LEFT_SHIFT))
-	{
-		
-	}
-	else {
-		player->resetAnimation();
-	}
+	player->update();
+	//enemies->update();
 	
 	//camera.zoom += float(GetMouseWheelMove() * 0.5f);
 }
@@ -72,7 +47,6 @@ void Game::draw()
 		DrawTexture(background, WIDTH / 3, 0, WHITE);
 
 		player->draw();
-		
 		
 	EndMode2D();
 

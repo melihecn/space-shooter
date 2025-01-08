@@ -15,6 +15,9 @@ Player::Player(Vector2 position)
 	this->moveRightT = LoadTexture(".\\assets\\ship\\PNG\\sprites\\ship01\\right.png");
 	this->currentSprite = idleSprite;
 	this->speed = 500;
+	this->deathSprite;
+	this->isMoving = false;
+	
 }
 
 Player::~Player()
@@ -44,6 +47,58 @@ void Player::setSpeed(int speed)
 	this->speed = speed;
 }
 
+void Player::update()
+{
+	handleInput();
+
+	for (auto it = lasers.begin(); it != lasers.end();)
+	{
+		it->update();
+
+		if (it->isOffScreen())
+		{
+			it = lasers.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
+}
+
+void Player::handleInput()
+{
+	if (IsKeyDown(KEY_D))
+	{
+		this->isMoving = true;
+		moveRight();
+	}
+	if (IsKeyDown(KEY_A)) 
+	{
+		this->isMoving = true;
+		moveLeft();
+	}
+	if (IsKeyDown(KEY_W)) 
+	{
+		this->isMoving = true;
+		moveUp();
+	}
+	if (IsKeyDown(KEY_S)) 
+	{
+		this->isMoving = true;
+		moveDown();
+	}
+
+	if (IsKeyDown(KEY_SPACE)) 
+	{
+		shoot();
+	}
+
+	if (!this->isMoving) {
+		resetAnimation();
+	}
+}
+
 void Player::resetAnimation()
 {
 	currentSprite = idleSprite;
@@ -63,24 +118,30 @@ void Player::moveRight()
 
 void Player::moveUp()
 {
-	currentSprite = idleSprite;
+	//currentSprite = idleSprite;
 	position.y -= speed * GetFrameTime();
 }
 
 void Player::moveDown()
 {
-	currentSprite = idleSprite;
+	//currentSprite = idleSprite;
 	position.y += speed * GetFrameTime();
 }
 
 void Player::shoot()
 {
-
+	Vector2 direction = { 0, -1 }; // Shooting upwards
+	lasers.push_back(Laser(position, direction, 800)); // Adjust speed as needed
 }
 
 void Player::draw() const
 {
 	DrawTextureEx(currentSprite, position, 0, 3, WHITE);
+
+	for (const auto& laser : lasers)
+	{
+		laser.draw();
+	}
 }
 
 void Player::die()
