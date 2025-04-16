@@ -1,19 +1,31 @@
 #include "Laser.h"
 #include <iostream>
 
+// Statik texture tanýmý
+Texture2D Laser::texture;
+
 Laser::Laser(Vector2 position, Vector2 direction, float speed)
     : position(position), direction(direction), speed(speed)
 {
-    texture = LoadTexture("./assets/ship/PNG/sprites/ship01/laser.png");
-    if (texture.id == 0) {
-        std::cerr << "Failed to load laser texture!" << std::endl;
-    }
 }
 
 Laser::~Laser()
 {
+}
+
+void Laser::initialize()
+{
+    texture = LoadTexture("./assets/ship/PNG/sprites/ship01/laser.png");
+    if (texture.id == 0) {
+        std::cerr << "Failed to load laser texture!" << std::endl;
+    }   
+}
+
+void Laser::unload()
+{
     UnloadTexture(texture);
 }
+
 
 void Laser::update()
 {
@@ -23,7 +35,7 @@ void Laser::update()
 
 void Laser::draw() const
 {
-    DrawTextureEx(texture, position, 0, 1, WHITE);
+    DrawTextureEx(texture, { position.x + 25, position.y }, 0, 3, WHITE);
 }
 
 bool Laser::isOffScreen() const

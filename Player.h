@@ -31,16 +31,14 @@ public:
 	void setPosition(Vector2 position);
 	int getSpeed() const;
 	void setSpeed(int speed);
+	std::vector<Laser> getLasers() const;
 
 	void update();
 	void handleInput();
 
 	void resetAnimation();
 
-	void moveLeft();
-	void moveRight();
-	void moveUp();
-	void moveDown();
+	void move(bool left, bool right, bool up, bool down);
 
 	void shoot();
 	void draw() const;

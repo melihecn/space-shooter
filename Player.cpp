@@ -17,6 +17,7 @@ Player::Player(Vector2 position)
 	this->speed = 500;
 	this->deathSprite;
 	this->isMoving = false;
+	this->lasers = {};
 	
 }
 
@@ -47,6 +48,12 @@ void Player::setSpeed(int speed)
 	this->speed = speed;
 }
 
+std::vector<Laser> Player::getLasers() const
+{
+	return lasers;
+}
+
+
 void Player::update()
 {
 	handleInput();
@@ -68,26 +75,19 @@ void Player::update()
 
 void Player::handleInput()
 {
-	if (IsKeyDown(KEY_D))
+	this->isMoving = false;
+
+	bool left = IsKeyDown(KEY_A);
+	bool right = IsKeyDown(KEY_D);
+	bool up = IsKeyDown(KEY_W);
+	bool down = IsKeyDown(KEY_S);
+
+	if (left || right || up || down)
 	{
 		this->isMoving = true;
-		moveRight();
+		move(left, right, up, down);
 	}
-	if (IsKeyDown(KEY_A)) 
-	{
-		this->isMoving = true;
-		moveLeft();
-	}
-	if (IsKeyDown(KEY_W)) 
-	{
-		this->isMoving = true;
-		moveUp();
-	}
-	if (IsKeyDown(KEY_S)) 
-	{
-		this->isMoving = true;
-		moveDown();
-	}
+
 
 	if (IsKeyDown(KEY_SPACE)) 
 	{
@@ -104,28 +104,42 @@ void Player::resetAnimation()
 	currentSprite = idleSprite;
 }
 
-void Player::moveLeft()
+void Player::move(bool left, bool right, bool up, bool down)
 {
-	currentSprite = moveLeftT;
-	position.x -= speed * GetFrameTime();
-}
+    // Hareket vektörü
+    Vector2 movement = { 0.0f, 0.0f };
 
-void Player::moveRight()
-{
-	currentSprite = moveRightT;
-	position.x += speed * GetFrameTime();
-}
+    // Hareket yönlerini kontrol et
+    if (left)
+    {
+        movement.x -= 1.0f; // Sola hareket
+        currentSprite = moveLeftT;
+    }
+    if (right)
+    {
+        movement.x += 1.0f; // Saða hareket
+        currentSprite = moveRightT;
+    }
+    if (up)
+    {
+        movement.y -= 1.0f; // Yukarý hareket
+    }
+    if (down)
+    {
+        movement.y += 1.0f; // Aþaðý hareket
+    }
 
-void Player::moveUp()
-{
-	//currentSprite = idleSprite;
-	position.y -= speed * GetFrameTime();
-}
+    // Hareket vektörünü normalize et
+    if (movement.x != 0.0f || movement.y != 0.0f)
+    {
+        float length = sqrtf(movement.x * movement.x + movement.y * movement.y);
+        movement.x /= length;
+        movement.y /= length;
+    }
 
-void Player::moveDown()
-{
-	//currentSprite = idleSprite;
-	position.y += speed * GetFrameTime();
+    // Hareketi uygula
+    position.x += movement.x * speed * GetFrameTime();
+    position.y += movement.y * speed * GetFrameTime();
 }
 
 void Player::shoot()
@@ -137,11 +151,6 @@ void Player::shoot()
 void Player::draw() const
 {
 	DrawTextureEx(currentSprite, position, 0, 3, WHITE);
-
-	for (const auto& laser : lasers)
-	{
-		laser.draw();
-	}
 }
 
 void Player::die()

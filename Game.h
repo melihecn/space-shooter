@@ -16,13 +16,14 @@ private:
 	std::vector<Enemy*> enemies = { 0 };
 	Camera2D camera;
 	Texture2D background;
+	Ui* ui;
 
 public:
 	Game();
-
 	~Game();
+
+	bool shouldClose;
 	
-	void start();
 	void update();
 	void draw();
 };

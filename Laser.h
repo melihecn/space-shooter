@@ -11,9 +11,12 @@ public:
     void draw() const;
     bool isOffScreen() const;
 
+    static void initialize();
+    static void unload();
+
 private:
     Vector2 position;
     Vector2 direction;
     float speed;
-    Texture2D texture;
+    static Texture2D texture; 
 };
