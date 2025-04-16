@@ -28,13 +28,13 @@ void Ui::Update()
             }
             if (CheckCollisionPointRec(GetMousePosition(), exitButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                 std::cout << "exite basildi \n";
-                CloseWindow();
                 break;
             }
             break;
         case GAME:
-            // Game logic goes here
-            break;
+            if (IsKeyPressed(KEY_ESCAPE)) {
+                currentScreen = OPTIONS;
+            }
         case OPTIONS:
             if (CheckCollisionPointRec(GetMousePosition(), fullscreenToggle) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                 isFullscreen = !isFullscreen;
@@ -87,7 +87,6 @@ void Ui::DrawTitleScreen()
 void Ui::DrawGameScreen()
 {
     // game ui
-    // Game rendering goes here
 }
 
 void Ui::DrawOptionsScreen()

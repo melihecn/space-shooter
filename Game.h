@@ -21,8 +21,6 @@ private:
 public:
 	Game();
 	~Game();
-
-	bool shouldClose;
 	
 	void update();
 	void draw();

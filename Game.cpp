@@ -3,13 +3,10 @@
 
 
 Game::Game()
-{
-	std::cout << "game init\n";
-	
+{	
 	ui = new Ui();
 	ui->Init();
 
-	
 	player = new Player(Vector2{ WIDTH / 2.f, HEIGHT / 2.f });
 	camera = { 0 };
 	camera.target = Vector2{player->getPosition().x + 20.f, player->getPosition().y + 20.f};

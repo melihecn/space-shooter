@@ -20,12 +20,10 @@ public:
 
 private:
 
-    // Title screen buttons
     Rectangle startButton;
     Rectangle optionsButton;
     Rectangle exitButton;
 
-    // Options screen controls
     Rectangle fullscreenToggle;
     Rectangle volumeSlider;
     Rectangle backButton;
