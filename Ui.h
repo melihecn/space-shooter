@@ -1,6 +1,9 @@
 #pragma once 
 #include "raylib.h"
 
+constexpr int WIDTH = 1920;
+constexpr int HEIGHT = 1080;
+
 class Ui
 {
 public:
@@ -13,6 +16,8 @@ public:
 
     enum Screen { TITLE, GAME, OPTIONS };
     Screen currentScreen;
+
+    bool shouldClose = false;
 
     void DrawTitleScreen();
     void DrawGameScreen();

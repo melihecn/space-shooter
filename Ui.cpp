@@ -8,9 +8,9 @@ Ui::~Ui() {}
 void Ui::Init()
 {
     // Initialize buttons and controls
-    startButton = { 350, 200, 100, 50 };
-    optionsButton = { 350, 300, 100, 50 };
-    exitButton = { 350, 400, 100, 50 };
+    startButton = {350, 200, 200, 100 };
+    optionsButton = { 350, 400, 200, 100 };
+    exitButton = { 350, 600, 200, 100 };
     fullscreenToggle = { 350, 200, 100, 50 };
     volumeSlider = { 350, 300, 200, 20 };
     backButton = { 350, 400, 100, 50 };
@@ -28,6 +28,7 @@ void Ui::Update()
             }
             if (CheckCollisionPointRec(GetMousePosition(), exitButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                 std::cout << "exite basildi \n";
+                shouldClose = true;
                 break;
             }
             break;
@@ -76,12 +77,12 @@ void Ui::Unload()
 void Ui::DrawTitleScreen()
 {
     DrawText("Title Screen", 350, 100, 20, DARKGRAY);
-    DrawRectangleRec(startButton, LIGHTGRAY);
-    DrawText("Start Game", startButton.x + 10, startButton.y + 10, 20, DARKGRAY);
-    DrawRectangleRec(optionsButton, LIGHTGRAY);
-    DrawText("Options", optionsButton.x + 10, optionsButton.y + 10, 20, DARKGRAY);
-    DrawRectangleRec(exitButton, LIGHTGRAY);
-    DrawText("Exit", exitButton.x + 10, exitButton.y + 10, 20, DARKGRAY);
+    DrawRectangleRec(startButton, BLACK);
+    DrawText("Start Game", startButton.x + 10, startButton.y + 10, 30, DARKGRAY);
+    DrawRectangleRec(optionsButton, BLACK);
+    DrawText("Options", optionsButton.x + 10, optionsButton.y + 10, 30, DARKGRAY);
+    DrawRectangleRec(exitButton, BLACK);
+    DrawText("Exit", exitButton.x + 10, exitButton.y + 10, 30, DARKGRAY);
 }
 
 void Ui::DrawGameScreen()
@@ -92,11 +93,11 @@ void Ui::DrawGameScreen()
 void Ui::DrawOptionsScreen()
 {
     DrawText("Options Screen", 350, 100, 20, DARKGRAY);
-    DrawRectangleRec(fullscreenToggle, LIGHTGRAY);
-    DrawText(isFullscreen ? "Fullscreen: ON" : "Fullscreen: OFF", fullscreenToggle.x + 10, fullscreenToggle.y + 10, 20, DARKGRAY);
-    DrawRectangleRec(volumeSlider, LIGHTGRAY);
+    DrawRectangleRec(fullscreenToggle, BLACK);
+    DrawText(isFullscreen ? "Fullscreen: ON" : "Fullscreen: OFF", fullscreenToggle.x + 10, fullscreenToggle.y + 10, 30, DARKGRAY);
+    DrawRectangleRec(volumeSlider, BLACK);
     DrawRectangle(volumeSlider.x + volume * volumeSlider.width - 5, volumeSlider.y - 5, 10, 30, DARKGRAY);
-    DrawText("Volume", volumeSlider.x - 60, volumeSlider.y, 20, DARKGRAY);
-    DrawRectangleRec(backButton, LIGHTGRAY);
-    DrawText("Back", backButton.x + 10, backButton.y + 10, 20, DARKGRAY);
+    DrawText("Volume", volumeSlider.x - 60, volumeSlider.y, 30, DARKGRAY);
+    DrawRectangleRec(backButton, BLACK);
+    DrawText("Back", backButton.x + 10, backButton.y + 10, 30, DARKGRAY);
 }

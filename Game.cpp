@@ -34,11 +34,10 @@ Game::~Game()
 
 void Game::update()
 {
-
 	ui->Update();
 	player->update();
+
 	//enemies->update();
-	
 	//camera.zoom += float(GetMouseWheelMove() * 0.5f);
 }
 

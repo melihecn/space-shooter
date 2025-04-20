@@ -8,17 +8,25 @@ int main(void)
 	SetTargetFPS(144);
 
 	Game *game = new Game();
+	
 	bool closeRequest = false;
 	bool shouldExit = false;
 
 	while (!shouldExit)
 	{	
-		if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)) closeRequest = true;
+		if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE))
+		{
+			closeRequest = true;
+		}
 
 		if (closeRequest == true)
 		{
-			if (IsKeyPressed(KEY_ENTER)) shouldExit = true;
+			DrawText("Quit Game?", WIDTH / 2 - 200, HEIGHT / 2 - 100, 30, BLACK);
+			DrawText("(Y)es (N)o", WIDTH / 2 - 200, HEIGHT / 2 - 40, 30, BLACK);
+			if (IsKeyPressed(KEY_N)) closeRequest = false;
+			if (IsKeyPressed(KEY_Y)) shouldExit = true;
 		}
+
 		game->update();
 		game->draw();
 	}

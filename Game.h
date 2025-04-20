@@ -6,9 +6,6 @@
 #include "Enemy.h"
 #include <vector>
 
-#define WIDTH 1920
-#define HEIGHT 1080
-
 class Game
 {
 private:
@@ -16,7 +13,7 @@ private:
 	std::vector<Enemy*> enemies = { 0 };
 	Camera2D camera;
 	Texture2D background;
-	Ui* ui;
+	Ui* ui = nullptr;
 
 public:
 	Game();
