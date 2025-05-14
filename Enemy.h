@@ -11,10 +11,17 @@ public:
 
 	void die();
 	void move();
+	void draw();
+	void update();
+
+	void checkCollision();
+
+	bool isDead;
 
 private:
 
 	Texture2D idleTexture;
+	Texture2D currentTexture;
 	Vector2 m_pos;
 	int health;
 	int type;

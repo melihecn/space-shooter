@@ -106,30 +106,28 @@ void Player::resetAnimation()
 
 void Player::move(bool left, bool right, bool up, bool down)
 {
-    // Hareket vektörü
+    
     Vector2 movement = { 0.0f, 0.0f };
 
-    // Hareket yönlerini kontrol et
     if (left)
     {
-        movement.x -= 1.0f; // Sola hareket
+        movement.x -= 1.0f; 
         currentSprite = moveLeftT;
     }
     if (right)
     {
-        movement.x += 1.0f; // Saða hareket
+        movement.x += 1.0f;
         currentSprite = moveRightT;
     }
     if (up)
     {
-        movement.y -= 1.0f; // Yukarý hareket
+        movement.y -= 1.0f; 
     }
     if (down)
     {
-        movement.y += 1.0f; // Aþaðý hareket
+        movement.y += 1.0f; 
     }
 
-    // Hareket vektörünü normalize et
     if (movement.x != 0.0f || movement.y != 0.0f)
     {
         float length = sqrtf(movement.x * movement.x + movement.y * movement.y);
@@ -137,15 +135,14 @@ void Player::move(bool left, bool right, bool up, bool down)
         movement.y /= length;
     }
 
-    // Hareketi uygula
     position.x += movement.x * speed * GetFrameTime();
     position.y += movement.y * speed * GetFrameTime();
 }
 
 void Player::shoot()
 {
-	Vector2 direction = { 0, -1 }; // Shooting upwards
-	lasers.push_back(Laser(position, direction, 800)); // Adjust speed as needed
+	Vector2 direction = { 0, -1 }; 
+	lasers.push_back(Laser(position, direction, 800));
 }
 
 void Player::draw() const

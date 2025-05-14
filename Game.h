@@ -10,7 +10,7 @@ class Game
 {
 private:
 	Player* player = nullptr;
-	std::vector<Enemy*> enemies = { 0 };
+	std::vector<Enemy*> enemies;
 	Camera2D camera;
 	Texture2D background;
 	Ui* ui = nullptr;

@@ -16,6 +16,7 @@ Game::Game()
 	background = LoadTexture("./assets/environment/PNG/bg1080p.png");
 	Laser::initialize();
 
+	enemies.push_back(new Enemy(0, { 100, 100 }, LoadTexture("./assets/enemy/PNG/sprites/enemy-01/layer1.png"), 10, 10));
 }
 
 Game::~Game()
@@ -35,7 +36,16 @@ Game::~Game()
 void Game::update()
 {
 	ui->Update();
+
 	player->update();
+	
+	for (auto enemy : enemies) {
+		enemy->update();
+		if (enemy->isDead) {
+			enemies.pop_back();
+		}
+	}
+
 
 	//enemies->update();
 	//camera.zoom += float(GetMouseWheelMove() * 0.5f);
@@ -60,6 +70,10 @@ void Game::draw()
 		for (const auto& laser : player->getLasers())
 		{
 			laser.draw();
+		}
+
+		for (auto enemy : enemies) {
+			enemy->draw();
 		}
 
 		EndMode2D();
