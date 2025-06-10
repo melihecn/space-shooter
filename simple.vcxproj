@@ -141,6 +141,9 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Ui.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\Sprite-0001.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

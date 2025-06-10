@@ -19,6 +19,8 @@ private:
 	int shootPower;
 	int speed;
 	bool isMoving;
+	float lastShotTime = 0.0f;
+	float shootCooldown = 0.5f;
 	std::vector<Laser> lasers;
 
 public:

@@ -5,25 +5,33 @@ Enemy::Enemy()
 
 }
 
-Enemy::Enemy(int type, Vector2 position, Texture2D idleTexture, int health, float speed)
+Enemy::Enemy(int type, Vector2 position, Texture2D idleTexture, float drawScale, int health, float speed)
 {
 	this->type = type;
-	this->m_pos = position;
+	this->position = position;
 	this->idleTexture = idleTexture;
 	this->health = health;
 	this->speed = speed;
 	this->isDead = false;
 	this->currentTexture = idleTexture;
+	this->drawScale = drawScale;
+	this->bbox = { position.x, position.y, idleTexture.width * drawScale, idleTexture.height * drawScale};
 }
 
 Enemy::~Enemy()
 {
+	UnloadTexture(currentTexture);
 }
 
 void Enemy::die()
 {
 	isDead = true;
-	UnloadTexture(currentTexture);
+}
+
+void Enemy::getHit()
+{
+	this->health -= 10;
+
 }
 
 void Enemy::move()
@@ -38,12 +46,28 @@ void Enemy::update()
 	}
 }
 
-void Enemy::checkCollision()
+Vector2 Enemy::getPosition() const
 {
-	BoundingBox a = { 200, 300 };
+	return this->position;
+}
+
+void Enemy::setPosition(Vector2 position)
+{
+	this->position = position;
 }
 
 void Enemy::draw()
 {
-	DrawTextureEx(currentTexture, m_pos, 0, 1, WHITE);
+	DrawTextureEx(currentTexture, position, 0, 2, WHITE);
+	DrawRectangleLines(bbox.x, bbox.y, bbox.width, bbox.height, RED);
+}
+
+Rectangle Enemy::getBBox() const
+{
+	return this->bbox;
+}
+
+void Enemy::setBBox(Rectangle bbox)
+{
+	this->bbox = bbox;
 }

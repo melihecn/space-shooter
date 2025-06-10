@@ -16,7 +16,7 @@ Game::Game()
 	background = LoadTexture("./assets/environment/PNG/bg1080p.png");
 	Laser::initialize();
 
-	enemies.push_back(new Enemy(0, { 100, 100 }, LoadTexture("./assets/enemy/PNG/sprites/enemy-01/layer1.png"), 10, 10));
+	enemies.push_back(new Enemy(0, { WIDTH / 2.f, 100 }, LoadTexture("./assets/enemy/PNG/sprites/enemy-01/idle.png"), 2, 10, 10));
 }
 
 Game::~Game()
@@ -33,6 +33,19 @@ Game::~Game()
 	CloseWindow();
 }
 
+void Game::checkCollisions(std::vector<Laser> lasers, Enemy* enemy)
+{
+	if (!lasers.empty()) {
+		if (CheckCollisionRecs(lasers.at(0).getBBox(), enemy->getBBox())) {
+			enemy->getHit();
+		}
+	}
+	else {
+
+	}
+	
+}
+
 void Game::update()
 {
 	ui->Update();
@@ -41,11 +54,11 @@ void Game::update()
 	
 	for (auto enemy : enemies) {
 		enemy->update();
+		checkCollisions(player->getLasers(), enemy);
 		if (enemy->isDead) {
 			enemies.pop_back();
 		}
 	}
-
 
 	//enemies->update();
 	//camera.zoom += float(GetMouseWheelMove() * 0.5f);
@@ -53,7 +66,7 @@ void Game::update()
 
 void Game::draw()
 {
-	// draw game stuff
+	// draw game
 	BeginDrawing();
 	ClearBackground(LIGHTGRAY);
 

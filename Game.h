@@ -19,6 +19,7 @@ public:
 	Game();
 	~Game();
 	
+	void checkCollisions(std::vector<Laser> lasers, Enemy* enemy);
 	void update();
 	void draw();
 };

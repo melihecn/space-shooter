@@ -141,10 +141,14 @@ void Player::move(bool left, bool right, bool up, bool down)
 
 void Player::shoot()
 {
-	Vector2 direction = { 0, -1 }; 
-	lasers.push_back(Laser(position, direction, 800));
+	float currentTime = GetTime();
+	if (currentTime - lastShotTime >= shootCooldown)
+	{
+		Vector2 direction = { 0, -1 };
+		lasers.push_back(Laser(position, direction, 800));
+		lastShotTime = currentTime;
+	}
 }
-
 void Player::draw() const
 {
 	DrawTextureEx(currentSprite, position, 0, 3, WHITE);

@@ -10,6 +10,12 @@ public:
     void update();
     void draw() const;
     bool isOffScreen() const;
+    
+    Vector2 getPosition() const;
+    void setPosition(Vector2 position);
+
+    Rectangle getBBox() const;
+    void setBBox(Rectangle bbox);
 
     static void initialize();
     static void unload();
@@ -17,6 +23,9 @@ public:
 private:
     Vector2 position;
     Vector2 direction;
+    Rectangle bbox;
     float speed;
-    static Texture2D texture; 
+    static Texture2D texture;
+    float drawScale;
+
 };
