@@ -1,10 +1,9 @@
 #pragma once
-#include "raylib.h"
-#include "raymath.h"
+#include "Common.h"
 #include "Player.h"
 #include "Ui.h"
 #include "Enemy.h"
-#include <vector>
+
 
 class Game
 {
@@ -19,7 +18,7 @@ public:
 	Game();
 	~Game();
 	
-	void checkCollisions(std::vector<Laser> lasers, Enemy* enemy);
+	void checkCollisions(std::vector<Laser> &lasers, Enemy* enemy);
 	void update();
 	void draw();
 };

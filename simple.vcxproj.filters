@@ -53,10 +53,8 @@
     <ClInclude Include="Laser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\Sprite-0001.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <ClInclude Include="Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

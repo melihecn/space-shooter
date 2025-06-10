@@ -1,22 +1,21 @@
 #include "game.h"
 #include <iostream>
 
-
 Game::Game()
 {	
 	ui = new Ui();
 	ui->Init();
 
-	player = new Player(Vector2{ WIDTH / 2.f, HEIGHT / 2.f });
+	player = new Player(Vector2{ SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f });
 	camera = { 0 };
 	camera.target = Vector2{player->getPosition().x + 20.f, player->getPosition().y + 20.f};
 	camera.zoom = 1.0f;
 	camera.rotation = 0.0f;
-	camera.offset = Vector2{ WIDTH / 2.0f, HEIGHT / 2.0f };
+	camera.offset = Vector2{ SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f };
 	background = LoadTexture("./assets/environment/PNG/bg1080p.png");
 	Laser::initialize();
 
-	enemies.push_back(new Enemy(0, { WIDTH / 2.f, 100 }, LoadTexture("./assets/enemy/PNG/sprites/enemy-01/idle.png"), 2, 10, 10));
+	enemies.push_back(new Enemy(0, { SCREEN_WIDTH / 2.f, 100 }, LoadTexture("./assets/enemy/PNG/sprites/enemy-01/idle.png"), 2, 500, 10));
 }
 
 Game::~Game()
@@ -29,21 +28,24 @@ Game::~Game()
 	ui->Unload();
 	delete ui;
 
-	
 	CloseWindow();
 }
 
-void Game::checkCollisions(std::vector<Laser> lasers, Enemy* enemy)
+void Game::checkCollisions(std::vector<Laser>& lasers, Enemy* enemy)
 {
-	if (!lasers.empty()) {
-		if (CheckCollisionRecs(lasers.at(0).getBBox(), enemy->getBBox())) {
+	for (auto it = lasers.begin(); it != lasers.end(); )
+	{
+		if (CheckCollisionRecs(it->getBBox(), enemy->getBBox()))
+		{
 			enemy->getHit();
+			it = lasers.erase(it); 
+			break;
+		}
+		else
+		{
+			++it;
 		}
 	}
-	else {
-
-	}
-	
 }
 
 void Game::update()
@@ -52,16 +54,18 @@ void Game::update()
 
 	player->update();
 	
-	for (auto enemy : enemies) {
+	for (auto enemy : enemies) 
+	{
 		enemy->update();
-		checkCollisions(player->getLasers(), enemy);
-		if (enemy->isDead) {
+
+		checkCollisions(player->getLasersRef(), enemy);
+
+		if (enemy->isDead) 
+		{
 			enemies.pop_back();
 		}
 	}
 
-	//enemies->update();
-	//camera.zoom += float(GetMouseWheelMove() * 0.5f);
 }
 
 void Game::draw()
@@ -76,7 +80,7 @@ void Game::draw()
 
 		BeginMode2D(camera);
 
-		DrawTexture(background, WIDTH / 3, 0, WHITE);
+		DrawTexture(background, SCREEN_WIDTH / 3, 0, WHITE);
 
 		player->draw();
 

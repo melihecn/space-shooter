@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include <iostream>
 
 Enemy::Enemy()
 {
@@ -23,17 +24,6 @@ Enemy::~Enemy()
 	UnloadTexture(currentTexture);
 }
 
-void Enemy::die()
-{
-	isDead = true;
-}
-
-void Enemy::getHit()
-{
-	this->health -= 10;
-
-}
-
 void Enemy::move()
 {
 
@@ -44,6 +34,17 @@ void Enemy::update()
 	if (this->health <= 0) {
 		die();
 	}
+}
+
+void Enemy::die()
+{
+	isDead = true;
+}
+
+void Enemy::getHit()
+{
+	this->health -= 10;
+	std::cout << this->health << std::endl;
 }
 
 Vector2 Enemy::getPosition() const

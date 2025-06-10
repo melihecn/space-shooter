@@ -1,7 +1,6 @@
 #pragma once
-#include "raylib.h"
+#include "Common.h"
 #include "Laser.h"
-#include <vector>
 
 class Player
 {
@@ -10,7 +9,6 @@ private:
 	Texture2D idleSprite;
 	Texture2D moveLeftT;
 	Texture2D moveRightT;
-
 	Texture2D shootSprite;
 	Texture2D deathSprite;
 	Texture2D currentSprite;
@@ -20,7 +18,7 @@ private:
 	int speed;
 	bool isMoving;
 	float lastShotTime = 0.0f;
-	float shootCooldown = 0.5f;
+	float shootCooldown = 0.3f;
 	std::vector<Laser> lasers;
 
 public:
@@ -33,15 +31,14 @@ public:
 	void setPosition(Vector2 position);
 	int getSpeed() const;
 	void setSpeed(int speed);
+
 	std::vector<Laser> getLasers() const;
+	std::vector<Laser>& getLasersRef();
 
 	void update();
 	void handleInput();
-
 	void resetAnimation();
-
 	void move(bool left, bool right, bool up, bool down);
-
 	void shoot();
 	void draw() const;
 	void die();

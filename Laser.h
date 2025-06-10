@@ -1,5 +1,5 @@
 #pragma once
-#include "raylib.h"
+#include "Common.h"
 
 class Laser
 {
@@ -27,5 +27,4 @@ private:
     float speed;
     static Texture2D texture;
     float drawScale;
-
 };

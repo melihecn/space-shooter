@@ -53,6 +53,10 @@ std::vector<Laser> Player::getLasers() const
 	return lasers;
 }
 
+std::vector<Laser>& Player::getLasersRef()
+{
+	return lasers;
+}
 
 void Player::update()
 {
@@ -88,7 +92,6 @@ void Player::handleInput()
 		move(left, right, up, down);
 	}
 
-
 	if (IsKeyDown(KEY_SPACE)) 
 	{
 		shoot();
@@ -111,21 +114,51 @@ void Player::move(bool left, bool right, bool up, bool down)
 
     if (left)
     {
-        movement.x -= 1.0f; 
+		if (position.x <= 0)
+		{
+			movement.x += 1.0f;
+		}
+		else {
+			movement.x -= 1.0f;
+		}
+
         currentSprite = moveLeftT;
     }
     if (right)
     {
-        movement.x += 1.0f;
+		if (position.x >= SCREEN_WIDTH - 100)
+		{
+			movement.x -= 1.0f;
+		}
+		else 
+		{
+			movement.x += 1.0f;
+		}
+
         currentSprite = moveRightT;
     }
     if (up)
     {
-        movement.y -= 1.0f; 
+		if (position.y <= 0)
+		{
+			movement.y += 1.0f;
+		}
+		else
+		{
+			movement.y -= 1.0f;
+		}
     }
     if (down)
     {
-        movement.y += 1.0f; 
+		if (position.y >= SCREEN_HEIGHT - 100)
+		{
+			movement.y -= 1.0f;
+		}
+		else 
+		{
+			movement.y += 1.0f;
+		}
+
     }
 
     if (movement.x != 0.0f || movement.y != 0.0f)
@@ -137,6 +170,8 @@ void Player::move(bool left, bool right, bool up, bool down)
 
     position.x += movement.x * speed * GetFrameTime();
     position.y += movement.y * speed * GetFrameTime();
+
+	std::cout << position.x << " " << position.y << "\n";
 }
 
 void Player::shoot()

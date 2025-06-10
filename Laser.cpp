@@ -8,11 +8,11 @@ Laser::Laser(Vector2 position, Vector2 direction, float speed)
 {
     this->drawScale = 3.f;
     this->bbox = { position.x, position.y, 19 * drawScale, 24 * drawScale};
-    
 }
 
 Laser::~Laser()
 {
+
 }
 
 void Laser::initialize()
@@ -27,7 +27,6 @@ void Laser::unload()
 {
     UnloadTexture(texture);
 }
-
 
 void Laser::update()
 {

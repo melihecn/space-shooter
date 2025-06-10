@@ -1,8 +1,5 @@
 #pragma once 
-#include "raylib.h"
-
-constexpr int WIDTH = 1920;
-constexpr int HEIGHT = 1080;
+#include "Common.h"
 
 class Ui
 {

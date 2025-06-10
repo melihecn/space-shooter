@@ -1,6 +1,5 @@
 #pragma once
-#include "raylib.h"
-#include <cmath>
+#include "Common.h"
 
 class Enemy
 {
@@ -22,8 +21,8 @@ public:
 	void setBBox(Rectangle bbox);
 
 	bool isDead;
-private:
 
+private:
 	Texture2D idleTexture;
 	Texture2D currentTexture;
 	Vector2 position;
