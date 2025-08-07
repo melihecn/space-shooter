@@ -13,11 +13,14 @@ private:
 	Camera2D camera;
 	Texture2D background;
 	Ui* ui = nullptr;
+	Vector2 backgroundPos;
 
 public:
 	Game();
 	~Game();
-	
+
+	bool shouldClose = true;
+
 	void checkCollisions(std::vector<Laser> &lasers, Enemy* enemy);
 	void update();
 	void draw();

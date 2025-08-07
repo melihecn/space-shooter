@@ -11,17 +11,21 @@ public:
     void Draw();
     void Unload();
 
+    bool shouldClose = false;
+
     enum Screen { TITLE, GAME, OPTIONS };
     Screen currentScreen;
-
-    bool shouldClose = false;
 
     void DrawTitleScreen();
     void DrawGameScreen();
     void DrawOptionsScreen();
 
-private:
+    void drawScore();
 
+    int getScore();
+    void setScore(int score);
+
+private:
     Rectangle startButton;
     Rectangle optionsButton;
     Rectangle exitButton;
@@ -29,6 +33,9 @@ private:
     Rectangle fullscreenToggle;
     Rectangle volumeSlider;
     Rectangle backButton;
+
+    int score;
     bool isFullscreen;
     float volume;
+    int fontSize;
 };

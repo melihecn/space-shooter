@@ -17,6 +17,7 @@ Enemy::Enemy(int type, Vector2 position, Texture2D idleTexture, float drawScale,
 	this->currentTexture = idleTexture;
 	this->drawScale = drawScale;
 	this->bbox = { position.x, position.y, idleTexture.width * drawScale, idleTexture.height * drawScale};
+	this->point = 10;
 }
 
 Enemy::~Enemy()
@@ -44,7 +45,6 @@ void Enemy::die()
 void Enemy::getHit()
 {
 	this->health -= 10;
-	std::cout << this->health << std::endl;
 }
 
 Vector2 Enemy::getPosition() const
@@ -71,4 +71,9 @@ Rectangle Enemy::getBBox() const
 void Enemy::setBBox(Rectangle bbox)
 {
 	this->bbox = bbox;
+}
+
+int Enemy::getPoint()
+{
+	return this->point;
 }

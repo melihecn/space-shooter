@@ -12,10 +12,12 @@ Game::Game()
 	camera.zoom = 1.0f;
 	camera.rotation = 0.0f;
 	camera.offset = Vector2{ SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f };
-	background = LoadTexture("./assets/environment/PNG/bg1080p.png");
+	background = LoadTexture("./assets/environment/PNG/bg.png");
+	backgroundPos = Vector2{ SCREEN_WIDTH / 3, 0 };
+
 	Laser::initialize();
 
-	enemies.push_back(new Enemy(0, { SCREEN_WIDTH / 2.f, 100 }, LoadTexture("./assets/enemy/PNG/sprites/enemy-01/idle.png"), 2, 500, 10));
+	enemies.push_back(new Enemy(0, { SCREEN_WIDTH / 2.f, 100 }, LoadTexture("./assets/enemy/PNG/sprites/enemy-01/idle.png"), 2, 100, 10));
 }
 
 Game::~Game()
@@ -48,9 +50,20 @@ void Game::checkCollisions(std::vector<Laser>& lasers, Enemy* enemy)
 	}
 }
 
+
 void Game::update()
 {
+	this->backgroundPos.y++;
+	if (this->backgroundPos.y > SCREEN_HEIGHT) {
+		this->backgroundPos.y = 0;
+	}
+
 	ui->Update();
+
+	if (ui->shouldClose) {
+		this->shouldClose = true;
+		return;
+	}
 
 	player->update();
 	
@@ -62,17 +75,17 @@ void Game::update()
 
 		if (enemy->isDead) 
 		{
+			ui->setScore(enemy->getPoint());
 			enemies.pop_back();
 		}
 	}
-
 }
 
 void Game::draw()
 {
 	// draw game
 	BeginDrawing();
-	ClearBackground(LIGHTGRAY);
+	ClearBackground(RAYWHITE);
 
 	ui->Draw();
 
@@ -80,7 +93,8 @@ void Game::draw()
 
 		BeginMode2D(camera);
 
-		DrawTexture(background, SCREEN_WIDTH / 3, 0, WHITE);
+		DrawTextureV(background, this->backgroundPos, WHITE);
+		DrawTextureV(background, Vector2{ this->backgroundPos.x, this->backgroundPos.y - 512 }, WHITE);
 
 		player->draw();
 

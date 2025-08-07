@@ -170,8 +170,6 @@ void Player::move(bool left, bool right, bool up, bool down)
 
     position.x += movement.x * speed * GetFrameTime();
     position.y += movement.y * speed * GetFrameTime();
-
-	std::cout << position.x << " " << position.y << "\n";
 }
 
 void Player::shoot()

@@ -7,13 +7,15 @@ Ui::~Ui() {}
 
 void Ui::Init()
 {
-    // Initialize buttons and controls
     startButton = {350, 200, 200, 100 };
     optionsButton = { 350, 400, 200, 100 };
     exitButton = { 350, 600, 200, 100 };
     fullscreenToggle = { 350, 200, 100, 50 };
     volumeSlider = { 350, 300, 200, 20 };
     backButton = { 350, 400, 100, 50 };
+
+    score = 0;
+    fontSize = 30;
 }
 
 void Ui::Update()
@@ -27,7 +29,7 @@ void Ui::Update()
                 currentScreen = OPTIONS;
             }
             if (CheckCollisionPointRec(GetMousePosition(), exitButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-                std::cout << "exite basildi \n";
+                
                 shouldClose = true;
                 break;
             }
@@ -76,28 +78,49 @@ void Ui::Unload()
 
 void Ui::DrawTitleScreen()
 {
-    DrawText("Title Screen", 350, 100, 20, DARKGRAY);
+    DrawText("Title Screen", 350, 100, fontSize, DARKGRAY);
     DrawRectangleRec(startButton, BLACK);
-    DrawText("Start Game", startButton.x + 10, startButton.y + 10, 30, DARKGRAY);
+    DrawText("Start Game", startButton.x + 10, startButton.y + 10, fontSize, DARKGRAY);
     DrawRectangleRec(optionsButton, BLACK);
-    DrawText("Options", optionsButton.x + 10, optionsButton.y + 10, 30, DARKGRAY);
+    DrawText("Options", optionsButton.x + 10, optionsButton.y + 10, fontSize, DARKGRAY);
     DrawRectangleRec(exitButton, BLACK);
-    DrawText("Exit", exitButton.x + 10, exitButton.y + 10, 30, DARKGRAY);
+    DrawText("Exit", exitButton.x + 10, exitButton.y + 10, fontSize, DARKGRAY);
 }
 
 void Ui::DrawGameScreen()
 {
     // game ui
+
+    drawScore();
+    DrawFPS(100, 100);
 }
 
 void Ui::DrawOptionsScreen()
 {
     DrawText("Options Screen", 350, 100, 20, DARKGRAY);
     DrawRectangleRec(fullscreenToggle, BLACK);
-    DrawText(isFullscreen ? "Fullscreen: ON" : "Fullscreen: OFF", fullscreenToggle.x + 10, fullscreenToggle.y + 10, 30, DARKGRAY);
+    DrawText(isFullscreen ? "Fullscreen: ON" : "Fullscreen: OFF", fullscreenToggle.x + 10, fullscreenToggle.y + 10, fontSize, DARKGRAY);
     DrawRectangleRec(volumeSlider, BLACK);
-    DrawRectangle(volumeSlider.x + volume * volumeSlider.width - 5, volumeSlider.y - 5, 10, 30, DARKGRAY);
-    DrawText("Volume", volumeSlider.x - 60, volumeSlider.y, 30, DARKGRAY);
+    DrawRectangle(volumeSlider.x + volume * volumeSlider.width - 5, volumeSlider.y - 5, 10, fontSize, DARKGRAY);
+    DrawText("Volume", volumeSlider.x - 60, volumeSlider.y, fontSize, DARKGRAY);
     DrawRectangleRec(backButton, BLACK);
-    DrawText("Back", backButton.x + 10, backButton.y + 10, 30, DARKGRAY);
+    DrawText("Back", backButton.x + 10, backButton.y + 10, fontSize, DARKGRAY);
+}
+
+void Ui::drawScore()
+{
+    DrawText("SCORE", SCREEN_WIDTH - 200, 100, fontSize, BLACK);
+    std::string scoreTextString = std::to_string(score);
+    const char* scoreTextChar = scoreTextString.c_str();
+    DrawText(scoreTextChar, SCREEN_WIDTH - 200, 150, fontSize, BLACK);
+}
+
+int Ui::getScore()
+{
+    return this->score;
+}
+
+void Ui::setScore(int score)
+{
+    this->score += score;
 }

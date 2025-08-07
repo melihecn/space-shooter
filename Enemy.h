@@ -20,6 +20,8 @@ public:
 	Rectangle getBBox() const;
 	void setBBox(Rectangle bbox);
 
+	int getPoint();
+
 	bool isDead;
 
 private:
@@ -27,6 +29,7 @@ private:
 	Texture2D currentTexture;
 	Vector2 position;
 	Rectangle bbox;
+	int point;
 	int health;
 	int type;
 	float speed;
