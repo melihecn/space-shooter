@@ -40,7 +40,6 @@ void Laser::update()
 void Laser::draw() const
 {
     DrawTextureEx(texture, { position.x + 25, position.y }, 0, 3, WHITE);
-    DrawRectangleLines(bbox.x, bbox.y, bbox.width, bbox.height, RED);
 }
 
 bool Laser::isOffScreen() const

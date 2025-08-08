@@ -4,7 +4,6 @@
 #include "Ui.h"
 #include "Enemy.h"
 
-
 class Game
 {
 private:

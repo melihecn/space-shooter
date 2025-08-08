@@ -16,8 +16,10 @@ Game::Game()
 	backgroundPos = Vector2{ SCREEN_WIDTH / 3, 0 };
 
 	Laser::initialize();
+	
+	enemies.push_back(new Enemy(0, { SCREEN_WIDTH / 2.f, 100 }, LoadTexture("./assets/enemy/PNG/sprites/enemy-01/idle.png"), 2, 10, 10));
+	enemies.push_back(new Enemy(0, { SCREEN_WIDTH / 3.f, 100 }, LoadTexture("./assets/enemy/PNG/sprites/enemy-02/idle.png"), 2, 10, 10));
 
-	enemies.push_back(new Enemy(0, { SCREEN_WIDTH / 2.f, 100 }, LoadTexture("./assets/enemy/PNG/sprites/enemy-01/idle.png"), 2, 100, 10));
 }
 
 Game::~Game()
@@ -40,7 +42,8 @@ void Game::checkCollisions(std::vector<Laser>& lasers, Enemy* enemy)
 		if (CheckCollisionRecs(it->getBBox(), enemy->getBBox()))
 		{
 			enemy->getHit();
-			it = lasers.erase(it); 
+			it = lasers.erase(it);
+			
 			break;
 		}
 		else
@@ -73,7 +76,7 @@ void Game::update()
 
 		checkCollisions(player->getLasersRef(), enemy);
 
-		if (enemy->isDead) 
+		if (enemy->isDead && enemy->playedAnimation) 
 		{
 			ui->setScore(enemy->getPoint());
 			enemies.pop_back();

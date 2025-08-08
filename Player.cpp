@@ -139,7 +139,7 @@ void Player::move(bool left, bool right, bool up, bool down)
     }
     if (up)
     {
-		if (position.y <= 0)
+		if (position.y <= SCREEN_HEIGHT / 2.f)
 		{
 			movement.y += 1.0f;
 		}
