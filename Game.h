@@ -13,6 +13,9 @@ private:
 	Texture2D background;
 	Ui* ui = nullptr;
 	Vector2 backgroundPos;
+	
+	bool isInitialized = false;
+	bool init();
 
 public:
 	Game();

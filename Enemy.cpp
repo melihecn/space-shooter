@@ -29,6 +29,10 @@ Enemy::~Enemy()
 	UnloadTexture(deathSpriteSheet);
 }
 
+void Enemy::initEnemies()
+{
+}
+
 void Enemy::move()
 {
 
@@ -38,31 +42,20 @@ void Enemy::update()
 {
 	if (this->health <= 0) {
 		isDead = true;
-		playedAnimation = false;
 	}
 	this->gotHit = false;
 }
 
 void Enemy::playAnimation(const char* animationName)
 {
-	if (animationName == "death") {
-	
-		int frameCounter = 7;
-		int currentFrame = 0;
-		Rectangle rect = { this->position.x, this->position.y, deathSpriteSheet.width / (frameCounter - 1), deathSpriteSheet.height };
-		
-
-		rect.x = float(currentFrame) * deathSpriteSheet.width / (frameCounter - 1);
-		DrawTextureRec(this->deathSpriteSheet, rect, this->position, WHITE);
-		currentFrame++;
-		
-	}
-	playedAnimation = true;
+ // implemente edilecek ilerde
 }
+
+
 
 void Enemy::die()
 {
-	isDead = true;
+	// animasyon burada olabilir
 }
 
 void Enemy::getHit()
@@ -81,7 +74,7 @@ void Enemy::setPosition(Vector2 position)
 	this->position = position;
 }
 
-void Enemy::draw()
+void Enemy::draw() const
 {
 	Color color = WHITE;
 	if (gotHit) {
@@ -89,11 +82,6 @@ void Enemy::draw()
 	}
 
 	DrawTextureEx(currentTexture, position, 0, 2, color);
-
-	if (isDead) {
-		playAnimation("death");
-		playedAnimation = true;
-	}
 }
 
 Rectangle Enemy::getBBox() const

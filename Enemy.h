@@ -11,7 +11,7 @@ public:
 	void die();
 	void getHit();
 	void move();
-	void draw();
+	void draw() const;
 	void update();
 	void playAnimation(const char* animationName);
 	void initEnemies();

@@ -38,4 +38,5 @@ private:
     bool isFullscreen;
     float volume;
     int fontSize;
+
 };

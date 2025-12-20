@@ -5,7 +5,7 @@ int main(void)
 	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Space Shooter");
 	SetExitKey(KEY_NULL);
 	SetWindowState(FLAG_VSYNC_HINT);
-	SetTargetFPS(144);
+	SetTargetFPS(120);
 
 	Game *game = new Game();
 

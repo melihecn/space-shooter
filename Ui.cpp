@@ -29,7 +29,6 @@ void Ui::Update()
                 currentScreen = OPTIONS;
             }
             if (CheckCollisionPointRec(GetMousePosition(), exitButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-                
                 shouldClose = true;
                 break;
             }
